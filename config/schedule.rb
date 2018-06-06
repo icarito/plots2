@@ -23,10 +23,10 @@
 set :output, "#{Dir.pwd}/public/cron_log.log"
 
 # To simply print date into the log file for checking if cron job is working properly
-# every 1.minutes do
-# 	puts Dir.pwd
-# 	command "date -u" #This will print utc time every 1 min in log/cron_log.log file
-# end
+every 1.minutes do
+	puts Dir.pwd
+	command "date -u" #This will print utc time every 1 min in log/cron_log.log file
+end
 
 every 1.week do
 	runner "DigestMailJob.perform_async"
