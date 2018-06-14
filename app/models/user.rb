@@ -392,6 +392,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def customize_digest(type)
+    if type==0
+      newtag = 'digest:daily'
+    elsif type==1
+      newtag = 'digest:weekly'
+    end
+    unless newtag.blank?
+      UserTag.where('value LIKE (?)','digest%').destroy_all
+      UserTag.create(uid: self.id, value: newtag)
+    end
+  end
+
   private
 
   def map_openid_registration(registration)
